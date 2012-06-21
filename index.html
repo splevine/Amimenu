@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+<html manifest="cache.manifest">
+-->
+<html charset="utf-8">
+  <head>
+    <meta charset="utf-8">
+    <title rel="localize[title]">Amimenu 2.0</title>
+    <meta property="og:image" content="http://amimenu.mowaps.com/img/logogrande.png"/>
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" />
+    <meta name="description" content="Mobile Open Restaurant Search. Made and update by users." />
+    <meta name="keywords" content="Restaurant,leaflet, pusher.com,map,javascript,cloudmade,bootstrap" />
+    <meta name="author" content="Alberto Munoz Fuertes, http://mowaps.com" />
+	<!-- iPhone -->
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+  	<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+  	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="homescreen/icon@2x.png" />
+  	<link rel="apple-touch-icon-precomposed" sizes="72x72"   href="homescreen/icon-72.png" />
+  	<link rel="apple-touch-icon-precomposed" sizes="57x57"   href="homescreen/icon.png" />
+  	<link rel="apple-touch-icon-precomposed" href="homescreen/icon.png" />
+	<link rel="apple-touch-startup-image" href="apple-touch-startup-image.png">
+	
+    <link REL="SHORTCUT ICON" HREF="favicon.ico">
+    <link href='http://fonts.googleapis.com/css?family=Norican' rel='stylesheet' type='text/css'>
+    <link href='css/index.min.css.gz' rel='stylesheet' type='text/css'>
+    <!--[if lte IE 8]><link rel="stylesheet" href="lib/Leaflet/leaflet.ie.css" /><![endif]-->
+	<!-- Le styles -->
+
+<style type="text/css" style="display: none !important;">
+    body {
+  background-image: url("img/blur.jpg");
+  background-position: 50% -50px;
+  padding-top: 60px;
+}
+#logo {
+  font-family: "Norican", cursive;
+  position: relative;
+  left: 20px;
+  bottom: 20px;
+  font-size: 3em;
+  text-shadow: #000 1px 1px 2px;
+}
+p {
+  line-height: 20px;
+  margin-bottom: 20px;
+  color: #999;
+ 
+}
+p.head{
+line-height: 25px;
+ font-size: 1.5em;
+}
+form {
+  margin: 0;
+}
+.btn {
+  padding: 6px 10px;
+}
+.blur {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px 0px 20px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.amimenu img {
+
+}
+.blur img {
+  position: relative;
+  left: 20px;
+  bottom: 120px;
+  margin-bottom: -350px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #FFF;
+  font-family: "Norican", cursive;
+}
+</style>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script type="text/javascript">
+      WebFontConfig = {
+        google: {
+            families: ['Norican::latin']
+        }
+      };
+      (function () {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+      </script>
+    <![endif]-->
+  	</head>
+
+  	<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=121203387957329";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  <div class="container">
+	<div class="row">
+		<div class="span6 offset1">
+		<h1 id="logo">Amimenu 2.0</h1>
+		<div class="fb-like" data-href="http://www.facebook.com/AmimenuCommunity" data-send="true" data-layout="button_count" data-width="250" data-show-faces="true" data-action="recommend"></div>
+		<!-- Coloca esta etiqueta donde quieras que se muestre el botón +1. -->
+<g:plusone annotation="inline-block"></g:plusone>
+
+<!-- Coloca esta petición de presentación donde creas oportuno. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+<script type="IN/Share" data-url="http://amimenu.mowaps.com" data-counter="right"></script>
+		</div>
+	</div>
+<div class="row">
+	<div class="span10 offset1 blur">
+		<div class="row">
+			<div class="span5">
+			<p></p>
+				<p rel="localize[previousexplain]" class="head">We're working hard on the next Amimenu.<br> Amimenu is an application that make you discover where to eat.</br> You only have to tell us where you are and we show you the restaurant around.</br> You also can add your restaurant´s special dishes and photos.</p>
+				<p><a class="btn btn-success" href="amimenu">Amimenu Beta »</a></p>
+			</div>
+			<div class="span5">
+				<p><img alt="Amimenu Browser" src="img/imac.png"></p>
+			</div>
+		</div>
+		<div class="row" style="padding-top:70px;font-size: 1.5em;">
+        <div class="span3">
+          <h2 rel="localize[open]">Open</h2>
+           <p rel="localize[openexplain]">Amimenu is open and change every day. You don´t need to register, only 2 minutes you can recommend us the restaurant you love and all the people could see in the application.</p>
+          <p><a class="btn" href="http://github.com/slaptot">View Source Code »</a></p>
+        </div>
+        <div class="span3">
+          <h2 rel="localize[mobile]">Mobile</h2>
+           <p rel="localize[mobileexplain]">We usually are in the streets looking for restaurants and we can not decide where to go. Now you could use it as web app in you iPhone or Android mobile and Amimenu find the best restaurant for you. Now you can make "Toque" in order to recive a call from the restaurant.</p>
+       </div>
+        <div class="span3">
+          <h2 rel="localize[real]">Real Time</h2>
+          <p rel="localize[realexplain]">Amimenu let you know what restaurant and what deals you have around and in real time. If you are managing a restaurant, you could send push messages to online users (mobile and web). New restaurants every day, new menus every hour and more and more events every second. Share on Facebook, Twitter or Google+.</p>
+        </div>
+      </div>
+		<div class="row">
+			<div class="span10">
+			<h2>Join us!</h2>
+				<p rel="localize[hire]">We are looking people to make Amimenu bigger and better, please send us an email to join us.</p>
+				 <p><a class="btn btn-info" href="mailto:slaptot@gmail.com?subject=joinAmimenu">Email »</a></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span10">
+			<h2>Amimenu API</h2>
+				<p rel="localize[api]">Working on it (right now). As soon as possible you could use amimenu in your apps.</p>
+				 <p><a class="btn btn-info" href="#">Access API »</a></p>
+			</div>
+		</div>
+		
+	</div>
+</div>
+	</div>
+
+  <script src="js/index.min.js.gz" charset="utf-8"></script>
+	  <script type="text/javascript" charset="utf-8">
+      $(function(){
+        //var opts = { language: "ja", pathPrefix: "local"};
+        var opts = { pathPrefix: "local"};
+       $("[rel*=localize]").localize("amimenu",opts);
+      // $("[rel*=localize]").localize("amimenu",opts);
+      })
+     </script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-29783044-1']);
+		_gaq.push(['_trackPageview']);
+		(function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == 		document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+	</script>
+  	</body>
+</html>

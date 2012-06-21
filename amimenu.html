@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<!--
+<html manifest="cache.manifest">
+-->
+<html charset="utf-8">
+  <head>
+    <meta charset="utf-8">
+    <title rel="localize[title]">Amimenu 2.0</title>
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" />
+    <meta name="description" content="Mobile Open Restaurant Search. Made and update by users." />
+    <meta name="keywords" content="Restaurant,leaflet, users, map, javascript, cloudmade" />
+    <meta name="author" content="Alberto Munoz Fuertes, http://mowaps.com" />
+	<!-- iPhone -->
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+  	<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+  	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="homescreen/icon@2x.png" />
+  	<link rel="apple-touch-icon-precomposed" sizes="72x72"   href="homescreen/icon-72.png" />
+  	<link rel="apple-touch-icon-precomposed" sizes="57x57"   href="homescreen/icon.png" />
+  	<link rel="apple-touch-icon-precomposed" href="homescreen/icon.png" />
+	<link rel="apple-touch-startup-image" href="apple-touch-startup-image.png">
+	
+    <link REL="SHORTCUT ICON" HREF="favicon.ico">
+    <link rel="stylesheet" href="lib/Leaflet/leaflet.css" />
+    <link rel="stylesheet" href="homescreen/add2home.css" />
+     <link rel="stylesheet" href="lib/bootstrap/css/jquery.dropdown.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="lib/Leaflet/leaflet.ie.css" /><![endif]-->
+
+    <!-- Le styles -->
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+ <style type="text/css">
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        overflow:auto;
+      }
+      #map {
+        height:300px;
+      /*  -moz-border-radius: 6px; 
+        -webkit-border-radius: 6px; 
+        -moz-box-shadow: 0px 6px 3px -3px #888;
+        -webkit-box-shadow: 0px 6px 3px -3px #888;
+        box-shadow: 0px 6px 3px -3px #888; 
+        background-color:white; border: solid 4px #80a8c1;
+        */
+      }
+      .navbar .brand {
+  display: block;
+float: left;
+padding: 2px 15px 0px;
+margin-left: 10px;
+margin-right: 10px;
+font-size: 20px;
+font-weight: 100;
+line-height: 0.5;
+color: #08C;     
+ }
+      .navbar .nav > li > a {
+        padding: 13px 10px 11px;
+      }
+      .navbar .btn, .navbar .btn-group {
+        margin-top: 8px;
+      }
+      .leaflet-top .leaflet-control {
+        margin-top: 50px;
+      }
+      .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+        background: #f7f7f7;
+        
+      }
+      .leaflet-popup-content{
+      }
+      .activeicon{
+        border-radius: 7px;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        background-color: #80A8C1;
+
+      }
+      .getgeolocation {
+       
+       display:inline-block;
+        border-radius: 7px;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        color: rgba(255, 255, 255, 1);
+      }
+      .getgeolocation a {
+        background-color: rgba(255, 255, 255, 0.75);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-image: url(img/location.png);
+        display: block;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        width: 19px;
+        height: 19px;
+      }
+      .getgeolocation a:hover {
+        background-color: #fff;
+      }
+ .listing {
+        position: absolute;
+        left: 30px;
+        top: 2px;
+        margin-left: 10px;
+        margin-top: 5px;
+        padding: 5px;
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        color: rgba(255, 255, 255, 1);
+        z-index: 100;
+      }
+
+
+      .geolocation {
+        position: absolute;
+        left: 0;
+        top: 2px;
+        margin-left: 10px;
+        margin-top: 5px;
+        padding: 5px;
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        -moz-border-radius: 7px;
+        -webkit-border-radius: 7px;
+        color: rgba(255, 255, 255, 1);
+        z-index: 9999;
+      }
+      .geolocation a {
+        background-color: rgba(255, 255, 255, 0.75);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-image: url(img/location.png);
+        display: block;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        width: 19px;
+        height: 19px;
+      }
+      .geolocation a:hover {
+        background-color: #fff;
+      }
+      .unhappyMessage{
+      color: #b94a48;
+      }
+      
+      #example2{
+    float:left;
+    margin:80px 42% 0 42%;
+  }
+  .sharrre .box{
+    background:#6f838c;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(#6f838c,0),color-stop(#4d5e66,1));
+    background:-webkit-linear-gradient(top, #6f838c 0%, #4d5e66 100%);
+    background:-moz-linear-gradient(top, #6f838c 0%, #4d5e66 100%);
+    background:-o-linear-gradient(top, #6f838c 0%, #4d5e66 100%);
+    background:linear-gradient(top, #6f838c 0%, #4d5e66 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#6f838c', endColorstr='#4d5e66',GradientType=0 );
+    -webkit-box-shadow:0 1px 1px #d3d3d3;
+    -moz-box-shadow:0 1px 1px #d3d3d3;
+    box-shadow:0 1px 1px #d3d3d3;
+    height:22px;
+    display:inline-block;
+    position:relative;
+    padding:0px 55px 0 8px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    font-size:12px;
+    float:left;
+    clear:both;
+    overflow:hidden;
+    -webkit-transition:all 0.3s linear;
+    -moz-transition:all 0.3s linear;
+    -o-transition:all 0.3s linear;
+    transition:all 0.3s linear;
+  }
+  .sharrre .left{
+    line-height:22px;
+    display:block;
+    white-space:nowrap;
+    text-shadow:0px 1px 1px rgba(255,255,255,0.3);
+    color:#ffffff;
+    -webkit-transition:all 0.2s linear;
+    -moz-transition:all 0.2s linear;
+    -o-transition:all 0.2s linear;
+    transition:all 0.2s linear;
+  }
+  .sharrre .middle{
+    position:absolute;
+    height:22px;
+    top:0px;
+    right:30px;
+    width:0px;
+    background:#63707e;
+    text-shadow:0px -1px 1px #363f49;
+    color:#fff;
+    white-space:nowrap;
+    text-align:left;
+    overflow:hidden;
+    -webkit-box-shadow:-1px 0px 1px rgba(255,255,255,0.4), 1px 1px 2px rgba(0,0,0,0.2) inset;
+    -moz-box-shadow:-1px 0px 1px rgba(255,255,255,0.4), 1px 1px 2px rgba(0,0,0,0.2) inset;
+    box-shadow:-1px 0px 1px rgba(255,255,255,0.4), 1px 1px 2px rgba(0,0,0,0.2) inset;
+    -webkit-transition:width 0.3s linear;
+    -moz-transition:width 0.3s linear;
+    -o-transition:width 0.3s linear;
+    transition:width 0.3s linear;
+  }
+  .sharrre .middle a{
+    color:#fff;
+    font-weight:bold;
+    padding:0 9px 0 9px;
+    text-align:center;
+    float:left;
+    line-height:22px;
+    -webkit-box-shadow:-1px 0px 1px rgba(255,255,255,0.4), 1px 1px 2px rgba(0,0,0,0.2) inset;
+    -moz-box-shadow:-1px 0px 1px rgba(255,255,255,0.4), 1px 1px 2px rgba(0,0,0,0.2) inset;
+    box-shadow:-1px 0px 1px rgba(255,255,255,0.4), 1px 1px 2px rgba(0,0,0,0.2) inset;
+  }
+  .sharrre .right{
+    position:absolute;
+    right:0px;
+    top:0px;
+    height:100%;
+    width:45px;
+    text-align:center;
+    line-height:22px;
+    color:#4b5d61;
+    background:#f1faf9;
+    background:-webkit-gradient(linear,left top,left bottom,color-stop(#f1faf9,0),color-stop(#bacfd2,1));
+    background:-webkit-linear-gradient(top, #f1faf9 0%, #bacfd2 100%);
+    background:-moz-linear-gradient(top, #f1faf9 0%, #bacfd2 100%);
+    background:-o-linear-gradient(top, #f1faf9 0%, #bacfd2 100%);
+    background:linear-gradient(top, #f1faf9 0%, #bacfd2 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1faf9', endColorstr='#bacfd2',GradientType=0 );
+  }
+  .sharrre .box:hover{
+    padding-right:160px;
+  }
+  .sharrre .middle a:hover{
+    text-decoration:none;
+  }
+  .sharrre .box:hover .middle{
+    width:120px;
+  } 
+    </style>
+    <link href="lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script type="text/javascript">
+      WebFontConfig = {
+        google: {
+            families: ['Norican::latin']
+        }
+      };
+      (function () {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+      </script>
+    <![endif]-->
+  </head>
+
+  <body >
+   
+ 	
+    <div class="navbar navbar navbar-fixed-top">
+         
+      <div class="navbar-inner">
+        <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+           <i class="icon-chevron-down icon-white"></i>
+          </a>
+        <a class="toggleWidth btn btn-navbar" data-toggle="collapse" class="toggleToMap">
+            <i id="listpopover" data-toggle="" class="icon-th-list icon-white"></i>
+          </a>
+          
+          <a onClick="$('#contactModal').modal('show');" class="brand" href="#" style='text-align: center; margin-left: auto; margin-right: auto;z-index:1;'>Beta <img src="img/logoheaderViejo.png"/></a>
+          
+          <div class="nav-collapse" style="width: 99%;">
+         <ul class="nav">
+             <li class="">
+             <form class="form-inline" style="margin-bottom:0px;margin-top:13px;">
+        <span data-dropdown="#listpusherdiv" class="badge badge-info"><i class="icon-flag icon-white"><p id="pusherinfo" style="margin-top:-14px;margin-left:13px"></p></i></span>
+        </form>
+     </li>
+     </ul>
+            <ul class="nav">
+             <li class="">
+             <a href="#" id="radiustosend" data-dropdown="#listradiusdiv" >Radius</a>
+            
+             </li>
+            <li>
+             <a id="radiusactive" class="toggleToMap" data-toggle="modal" href="#searchMapModal"><i id="iconoradius" class="icon-screenshot icon-white"></i></a>
+            </li>
+            <li>
+       <a id="listpopover" class="toggleWidth" rel="popover" data-content="Change to list view" data-toggle="" href="#" ><i class="icon-list icon-white"></i></a>
+    
+    </li>
+    	
+              <li>
+              
+              <!--<input id="searching" type="text" style="margin-top: 10px;width:300px;" placeholder="name, city, content..." >-->
+              <form class="form-inline" style="margin-bottom:0px;">
+  				<div class="controls">
+   					<div class="input-append">
+       					<input id="searching" type="text" style="margin-top: 8px;width:250px;display:inline;" placeholder="name, city, content..." rel="localize[searchinput]"><button style="display:inline-block;" class="btn" type="button" id="makesearch"><i class="icon-search"></i></button>
+    				</div>
+  				</div>
+			</form>​
+              </li>
+              <li >
+                  <a href="#" id="namecountry" data-dropdown="#listcountriesdiv" rel="localize[countries]">Countries</a>
+					</li>          
+				 <li >
+                  <a href="#" id="namestate" data-dropdown="#liststatesdiv" rel="localize[states]">States</a>
+					</li>
+        		<li >
+                  <a href="#" id="namecity" data-dropdown="#listcitiesdiv" rel="localize[cities]">Cities</a>
+					</li>
+				
+            </ul>
+            
+            <form class="navbar-form pull-right">
+               <span style=""><a rel="localize[btnadd]" class='toggleToMap btn btn-primary btn-small' data-toggle="modal" href="#addmeModal">Add</a></span>
+               <span><a rel="localize[btnremove]" class='toggleToMap btn btn-danger btn-small' data-toggle="modal" href="#removemeModal">Remove</a></span>
+               <span><a rel="localize[btnedit]" class='toggleToMap btn btn-success btn-small' data-toggle="modal" href="#editmeModal">Edit</a></span>
+              
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+   <div class="modal hide fade" id="restaurantDetails">  
+   <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 id="detailsname"></h3>
+  
+
+      </div>
+  <div class="modal-body ">
+  <div class="tabbable tabs-left"> 
+  	<ul class="nav nav-tabs">
+    	<li class="active"><a href="#tab1" data-toggle="tab">Info</a></li>
+    	<li><a href="#mondaydetail" data-toggle="tab">M</a></li>
+    	<li><a href="#tuedetail" data-toggle="tab">T</a></li>
+    	<li><a href="#wendetail" data-toggle="tab">W</a></li>
+    	<li><a href="#thudetail" data-toggle="tab">T</a></li>
+    	<li><a href="#fridetail" data-toggle="tab">F</a></li>
+    	<li><a href="#satdetail" data-toggle="tab">S</a></li>
+    	<li><a href="#sundetail" data-toggle="tab">S</a></li>
+  	</ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+    
+     <a data-toggle="modal" href="#completeimage"><img id="detailsimage" src="" width="60" height="60"/></a>
+    <label><strong>Cell Phone: </strong><h6 id="detailsmobile"></h6></label>
+     <label><strong>Office Phone: </strong><h6 id="detailsphone"></h6></label>
+      <label><strong>Address: </strong><h6 id="detailsaddress"></h6></label>
+       <label><strong>Email: </strong><h6><a href="" id="detailsmail"></a></h6></label>
+        <label><strong>Web: </strong><h6><a target="_blank" href="#" id="detailsweb"></a></h6></label>
+   <label><strong>Info: </strong><h6 id="detailsinfo"></h6></label>
+       <p id="detailsintro"></p>
+    </div>
+    <div class="tab-pane" id="mondaydetail">
+      <h3>Monday Menu:</h3><h6 id="introlunesdetail"></h6>
+    </div>
+    <div class="tab-pane" id="tuedetail">
+      <h3>Tuesday Menu:</h3><h6 id="intromartesdetail"></h6>
+    </div>
+    <div class="tab-pane" id="wendetail">
+      <h3>Wendsday Menu:</h3><h6 id="intromiercolesdetail"></h6>
+    </div>
+    <div class="tab-pane" id="thudetail">
+      <h3>Thursday Menu:</h3><h6 id="introjuevesdetail"></h6>
+    </div>
+    <div class="tab-pane" id="fridetail">
+      <h3>Friday Menu:</h3><h6 id="introviernesdetail"></h6>
+    </div>
+    <div class="tab-pane" id="satdetail">
+      <h3>Saturday Menu:</h3><h6 id="introsabadodetail"></h6>
+    </div>
+    <div class="tab-pane" id="sundetail">
+      <h3>Sunday Menu:</h3><h6 id="introsabadodetail"></h6>
+    </div>
+  </div>
+</div>
+  
+  
+       
+       </div>
+         <div class="modal-footer">
+              <div id="shareme" data-url="" data-text="Make your sharing widget with Sharrre (jQuery Plugin)" class="sharrre"></div>
+            </div>
+    </div>
+
+
+      <div class="modal hide fade" id="registerModal">  
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+         <h3>Register</h3>
+        
+      </div>
+       <div class="modal-body">
+ <div class="tabbable tabs-left">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#1" data-toggle="tab">Info</a></li>
+          <li class=""><a href="#2" data-toggle="tab">M</a></li>
+          <li class=""><a href="#3" data-toggle="tab">T</a></li>
+          <li class=""><a href="#4" data-toggle="tab">W</a></li>
+          <li class=""><a href="#5" data-toggle="tab">T</a></li>
+          <li class=""><a href="#6" data-toggle="tab">F</a></li>
+          <li class=""><a href="#7" data-toggle="tab">S</a></li>
+          <li class=""><a href="#8" data-toggle="tab">S</a></li>
+        </ul>
+          <form id="inputform" method="post" enctype="multipart/form-data" action='ajaximage.php'>
+        <div class="tab-content">
+          <div class="tab-pane active" id="1">
+           
+              
+              <input type="text" class="span3" placeholder="Restaurant Name (Required)" id="name" name="name" /><br/>
+              
+              <input type="text" class="span3" placeholder="Description (Required)" id="intro" name="intro" /><br/>
+              <input type="text" class="span3" placeholder="Address (Required)" id="addresse" name="addresse" /><br/>
+              <input type="text" class="span1" placeholder="City (Required)" id="city" name="city" readonly="readonly"/>
+              <input type="text" class="span1" placeholder="PostCode (Required)" id="postcode" name="postcode" readonly="readonly"/>
+<input type="text" class="span1" placeholder="State (Required)" id="state" name="state" readonly="readonly" />
+<input type="text" class="span1" placeholder="Country (Required)" id="country" name="country" readonly="readonly"/>
+              <div class="getgeolocation">
+              <a href="#" onclick="getLocate($('#lat').val(),$('#lng').val()); return false;" title="My Location"></a>
+
+      				       		  </div>
+              <br/>
+              <input type="text" class="span3" placeholder="Phone (Required)" id="phone" name="phone" value="" /><br/>
+              
+              <input type="text" class="span3" placeholder="Website (Optional)" id="website" name="website" value="http://" /><br/>
+              
+              <input type="text" class="span3" placeholder="Your Email, never shared (Required)" id="email" name="email" /><br/>
+              <label><strong>Image:</strong><input type="file" name="fileToUpload" id="fileToUpload"/></label>
+              <input style="display: none;" type="text" id="lat" name="lat" value="" />
+              <input style="display: none;" type="text" id="lng" name="lng" value="" />
+              	<div class="alert alert-block" id="checkerror" style="display:none;">
+  					<a class="close" data-dismiss="alert" href="#">×</a>
+  						<h4 class="alert-heading">Warning!</h4>
+  						<h3 id="checkform"></h3>
+				</div>
+
+                             </div>
+          <div class="tab-pane" id="2">
+          <label><strong>Menu for Monday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introlunes" name="introlunes" rows="3"></textarea>
+          </div>
+          <div class="tab-pane" id="3">
+          <label><strong>Menu for Tuesday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="intromartes" name="intromartes" rows="3"></textarea>
+           </div>
+           <div class="tab-pane" id="4">
+          <label><strong>Menu for Wednesday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="intromiercoles" name="intromiercoles" rows="3"></textarea>
+           </div>
+            <div class="tab-pane" id="5">
+          <label><strong>Menu for Thursday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introjueves" name="introjueves" rows="3"></textarea>
+           </div>
+            <div class="tab-pane" id="6">
+          <label><strong>Menu for Friday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introviernes" name="introviernes" rows="3"></textarea>
+           </div>
+            <div class="tab-pane" id="7">
+          <label><strong>Menu for Saturday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introsabado" name="introsabado" rows="3"></textarea>
+           </div>
+           <div class="tab-pane" id="8">
+          <label><strong>Menu for Sunday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introdomingo" name="introdomingo" rows="3"></textarea>
+           </div>
+
+
+        </div>
+         
+
+       
+</div>
+</div>
+ <div class="modal-footer ">
+ <div class="row-fluid" style="margin-top:0px !important">
+                <div class="span12" style="text-align:center;"><button rel="localize[btncancel]" type="button" class="btn" onclick="cancelRegistration()">Cancel</button>
+                <button rel="localize[btnsubmit]" type="submit" class="btn btn-primary" >Submit</button></div>
+              </div>
+                </div>           
+                           
+                            </form>
+
+</div>
+
+    <div class="modal hide fade" id="contactModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 rel="localize[contactme]">Contact Me!</h3>
+      </div>
+      <div class="modal-body">
+        <p><strong>Email:</strong> <a href="mailto: slaptot@gmail.com">slaptot@gmail.com</a></p>
+        <p><strong>Twitter:</strong> <a href="https://twitter.com/#!/alberticomf">@alberticomf</a></p>
+        <p><strong>Website</strong> <a href="http://mowaps.com">mowaps.com</a></p>
+      </div>
+    </div>
+
+    <div class="modal hide fade" id="addmeModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 rel="localize[addmemap]">Add it to the map!</h3>
+      </div>
+      <div class="modal-body">
+        <p rel="localize[clickandgo]">Click on the Go! button below to get started.</p>
+        <p rel="localize[navigatecontinue]" >Navigate to your desired location and click on the map to drop a marker and submit your information.</p>
+      </div>
+      <div class="modal-footer">
+        <a rel="localize[btncontinue]" href="#" onclick="$('#addmeModal').modal('hide'); initRegistration(); return false;"class="btn btn-primary">Continue</a>
+      </div>
+    </div>
+
+    <div class="modal hide fade" id="insertSuccessModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 rel="localize[exito]">Success!</h3>
+      </div>
+      <div class="modal-body">
+        <p rel="localize[exitothanks]">Thanks for joining Amimenu!</p>
+        <p rel="localize[exitoexplain]">You should receive an email shortly with instructions on how to edit your information.</p>
+      </div>
+    </div>
+     <div class="modal hide fade" id="editSuccessFinalModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 rel="localize[exito]">Success!</h3>
+      </div>
+      <div class="modal-body">
+        <p rel="localize[thanksjoin]">Thanks for joining and help us to be update!</p>
+      </div>
+    </div>
+
+    
+    <div class="modal hide fade" id="insertFailModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 rel="localize[fail]">Fail!</h3>
+      </div>
+      <div class="modal-body">
+        <p rel="localize[failwrong]">Something was wrong!</p>
+        <p> rel="localize[failretry]">Please retry later.</p>
+      </div>
+    </div>
+
+    <div class="modal hide fade" id="removemeModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Remove</h3>
+      </div>
+      <div class="modal-body">
+        <form class="well">
+          <label>Email</label>
+          <input type="text" class="span3" name="email_remove" id="email_remove">
+          <label>Token</label>
+          <input type="password" class="span3" name="token_remove" id="token_remove"><br>
+          <button rel="localize[btnsubmit]" type="button" class="btn btn-primary" onclick="removeRestaurant();">Submit</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="modal hide fade" id="dartoqueModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Toque!</h3>
+      </div>
+      <div class="modal-body">
+        <form class="well">
+        <label style="display: none;" type="text" id="teltosend" name="teltosend"></label>
+          <input type="text" class="span3" placeholder="Your Name (Required)" name="name_toque" id="name_toque">
+          <input type="text" class="span3" placeholder="Email (Required)" name="email_toque" id="email_toque">
+          <input type="tel" class="span3" placeholder="Your Phone (Required)" name="phone_toque" id="phone_toque"><br>
+          <button rel="localize[btnsubmit]" type="button" class="btn btn-primary" onclick="sendToque();">Submit</button>
+          
+          <div id="failsms" class="alert alert-error hide">
+        <button class="close" data-dismiss="alert">×</button>
+        <p><strong>Oh!</strong> Fail to send touch, try it later</p>
+      </div>
+      <div id="oksms" class="alert alert-success hide">
+        <button class="close" data-dismiss="alert">×</button>
+        <p><strong>Good!</strong> We have send a message to them</p>
+      </div>
+      <div id="tellsms" class="alert alert-info hide">
+        <button class="close" data-dismiss="alert">×</button>
+        <p><strong>Upss!</strong> Tell them about us</p>
+      </div>
+
+          
+        </form>
+        
+      </div>
+    </div>
+    
+    <div class="modal hide fade" id="editmeModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Edit</h3>
+      </div>
+      <div class="modal-body">
+        <form class="well">
+          <label>Email</label>
+          <input type="text" class="span3" name="email_edit" id="email_edit">
+          <label>Token</label>
+          <input type="password" class="span3" name="token_edit" id="token_edit"><br>
+          <button rel="localize[btnsubmit]" type="button" class="btn btn-primary" onclick="editRestaurant();">Submit</button>
+        </form>
+      </div>
+    </div>
+
+
+
+    <div class="modal hide fade" id="removeSuccessModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>You have been removed</h3>
+      </div>
+      <div class="modal-body">
+        <p>You have been removed from the Leaflet User Map.</p>
+        <p>Thanks for your interest and feel free to add youself back at any time.</p>
+      </div>
+    </div>
+    
+         <div class="modal hide fade" id="editSuccessModal">  
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+         <h3>Edit</h3>
+        
+      </div>
+       <div class="modal-body">
+ <div class="tabbable tabs-left">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#1edit" data-toggle="tab">Info</a></li>
+          <li class=""><a href="#pushedit" data-toggle="tab">Push</a></li>
+          <li class=""><a href="#2edit" data-toggle="tab">M</a></li>
+          <li class=""><a href="#3edit" data-toggle="tab">T</a></li>
+          <li class=""><a href="#4edit" data-toggle="tab">W</a></li>
+          <li class=""><a href="#5edit" data-toggle="tab">T</a></li>
+          <li class=""><a href="#6edit" data-toggle="tab">F</a></li>
+          <li class=""><a href="#7edit" data-toggle="tab">S</a></li>
+          <li class=""><a href="#8edit" data-toggle="tab">S</a></li>
+        </ul>
+          <form id="inputformedit" method="post" enctype="multipart/form-data" action='edit_insert_restaurant.php'>
+        <div class="tab-content">
+          <div class="tab-pane active" id="1edit">
+           
+              <a data-toggle="modal" href="#completeimage"><img id="imageedit" src="" width="60" height="60"/></a><br/>
+              <input type="text" class="span3" placeholder="Restaurant Name (Required)" id="nameedit" name="nameedit" /><br/>
+              
+              <input type="text" class="span3" placeholder="Description (Required)" id="introedit" name="introedit" /><br/>
+              <input type="text" class="span3" placeholder="Address (Required)" id="addresseedit" name="addresseedit" /><br/>
+              <input type="text" class="span1" placeholder="City (Required)" id="cityedit" name="cityedit" />
+              <input type="text" class="span1" placeholder="PostCode (Required)" id="postcodeedit" name="postcodeedit" />
+<input type="text" class="span1" placeholder="State (Required)" id="stateedit" name="stateedit"  />
+<input type="text" class="span1" placeholder="Country (Required)" id="countryedit" name="countryedit" />
+             
+              <br/>
+              <input type="text" class="span3" placeholder="Phone (Required)" id="phoneedit" name="phoneedit" value="" /><br/>
+              
+              <input type="text" class="span3" placeholder="Website (Optional)" id="websiteedit" name="websiteedit" value="http://" /><br/>
+              
+              <input type="text" class="span3" placeholder="Your Email, never shared (Required)" id="emailedit" name="emailedit" /><br/>
+              <label><strong>Image:</strong><input type="file" name="fileToUpload" id="fileToUpload"/></label>
+              <input style="display: none;" type="text" id="latedit" name="latedit" value="" />
+              <input style="display: none;" type="text" id="lngedit" name="lngedit" value="" />
+              <input style="display: none;" type="text" id="idrestedit" name="idrestedit" value="" />
+              	<div class="alert alert-block" id="checkerror" style="display:none;">
+  					<a class="close" data-dismiss="alert" href="#">×</a>
+  						<h4 class="alert-heading">Warning!</h4>
+  						<h3 id="checkform"></h3>
+				</div>
+
+                             </div>
+           <div class="tab-pane" id="pushedit">
+          
+          <label>Mensaje</label>
+          <input MAXLENGTH="50" type="text" class="span3" name="mensaje_push" id="mensaje_push">
+          <input style="display: none;" type="text" id="id_push" name="id_push" value="" />
+          <button rel="localize[btnsubmit]" type="button" class="btn btn-primary" onclick="sendPush();">Submit</button>
+        
+		</div>
+          <div class="tab-pane" id="2edit">
+          <label><strong>Menu for Monday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introlunesedit" name="introlunesedit" rows="3"></textarea>
+          </div>
+          
+          <div class="tab-pane" id="3edit">
+          <label><strong>Menu for Tuesday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="intromartesedit" name="intromartesedit" rows="3"></textarea>
+           </div>
+           <div class="tab-pane" id="4edit">
+          <label><strong>Menu for Wednesday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="intromiercolesedit" name="intromiercolesedit" rows="3"></textarea>
+           </div>
+            <div class="tab-pane" id="5edit">
+          <label><strong>Menu for Thursday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introjuevesedit" name="introjuevesedit" rows="3"></textarea>
+           </div>
+            <div class="tab-pane" id="6edit">
+          <label><strong>Menu for Friday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introviernesedit" name="introviernesedit" rows="3"></textarea>
+           </div>
+            <div class="tab-pane" id="7edit">
+          <label><strong>Menu for Saturday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introsabadoedit" name="introsabadoedit" rows="3"></textarea>
+           </div>
+           <div class="tab-pane" id="8edit">
+          <label><strong>Menu for Sunday:</strong> <i>Description for customers</i></label>
+            <textarea class="input-xlarge" id="introdomingoedit" name="introdomingoedit" rows="3"></textarea>
+           </div>
+
+
+        </div>
+         
+
+       
+</div>
+</div>
+ <div class="modal-footer ">
+ <div class="row-fluid" style="margin-top:0px !important;">
+                <div class="span12" style="text-align:center;"><button rel="localize[btncancel]" type="button" class="btn" onclick="cancelRegistration()">Cancel</button>
+                <button rel="localize[btnsubmit]" type="submit" class="btn btn-primary" >Submit</button>
+
+</div>
+              </div>
+                </div>           
+                           
+                            </form>
+
+</div>
+
+<div class="modal hide fade" id="searchMapModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 rel="localize[searchonmap]">Search on Map</h3>
+      </div>
+      <div class="modal-body">
+        <p rel="localize[touchcity]">Touch on a city on map</p>
+      </div>
+       <div class="modal-footer">
+                <a href="#" rel="localize[btnclose]" class="btn btn-primary" onClick="$('#searchMapModal').modal('hide');return false;">Close</a>
+                <a href="#" rel="localize[btncontinue]" class="btn" onClick="$('#searchMapModal').modal('hide');setRadiusActive();$('#iconoradius').addClass('activeicon'); return false;">Continue</a>
+              </div>
+    </div>
+
+
+     <div class="modal hide fade" id="lastSearchModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 rel="localize[lastsearch]">Last Search</h3>
+      </div>
+      <div class="modal-body">
+        <p rel="localize[lastlocation]">Do you like to get your last location search?</p>
+      </div>
+       <div class="modal-footer">
+                <a href="#" rel="localize[btnclose]" class="btn btn-primary" onClick="$('#lastSearchModal').modal('hide');return false;">Close</a>
+                <a href="#" rel="localize[btncontinue]" class="btn" onClick="liveRadiusSearch($.jStorage.get('lastlat'),$.jStorage.get('lastlng'));$('#lastSearchModal').modal('hide');return false;">Continue</a>
+              </div>
+    </div>
+    
+    
+ <div class="modal hide fade" id="completeimage">
+ <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 id="nombreimagenrest"></h3>
+      </div>
+
+      <div class="modal-body">
+        <img id="completeimagesource" src="" width="300"/>
+      </div>
+    </div>
+    
+    <div class="modal hide fade" id="completedays">
+              <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Alert</h3>
+              </div>
+              <div class="modal-body">
+                <p>You have not insert all the days menus</p>
+              </div>
+              <div class="modal-footer">
+                <a href="#" rel="localize[btnclose]" class="btn btn-primary" onClick="$('#completedays').modal('hide');return false;">Close</a>
+                <a href="#" rel="localize[btncontinue]" class="btn" onClick="$('#completedays').modal('hide');return true;">Continue</a>
+              </div>
+            </div>
+      <div class="modal hide fade" id="linkshare">
+              <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Share it!</h3>
+              </div>
+              <div class="modal-body">
+                <iframe id="iframeshare" style="border:none; width:450px; height:200px"></iframe>
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+
+
+<div id="map">&nbsp;</div>
+    <div class="geolocation">
+      <a href="#" onclick="geoLocate(); return false;" ></a>
+    </div>
+   
+
+     
+
+ 
+ 
+ <div id="mapcontentlist"  class="container-fluid hide" >
+          <div class="row-fluid" style="overflow-y: scroll;-webkit-overflow-scrolling: touch;margin-top:-40px;height:100%;">
+           <ul class="thumbnails">
+          
+        </ul>
+
+</div><!--/container-->
+      </div><!--/row-->
+    <div id="listradiusdiv" class="dropdown-menu has-tip has-scroll">
+    <ul id="listradius">
+    	<li ><a href="#" onclick="$('#radiustosend').html('0.5');">0.5</a></li>
+    	<li ><a href="#" onclick="$('#radiustosend').html('1');">1</a></li>
+    	<li ><a href="#" onclick="$('#radiustosend').html('5');">5</a></li>
+    	<li ><a href="#" onclick="$('#radiustosend').html('10');">10</a></li>
+    	
+    </ul>
+</div>
+<div id="listcitiesdiv" class="dropdown-menu has-tip has-scroll">
+    <ul id="listcities">
+    </ul>
+</div>
+<div id="liststatesdiv" class="dropdown-menu has-tip has-scroll">
+    <ul id="liststates">
+    </ul>
+</div>
+<div id="listcountriesdiv" class="dropdown-menu has-tip has-scroll">
+    <ul id="listcountries">
+    </ul>
+</div>
+<div id="listpusherdiv" class="dropdown-menu has-tip has-scroll">
+<span class="label label-important" onclick="deletePusher();">Delete</span>
+    <ul id="listpusher">
+    
+    </ul>
+</div>
+     <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="lib/Leaflet/leaflet.js"></script>
+    <script type="application/javascript" src="js/jquery.localize.js" charset="utf-8"></script>
+    <script src="js/jquery.form.js"></script>
+    
+        <script type="application/javascript" src="homescreen/add2home.js" charset="utf-8"></script>
+    <script type="application/javascript" src="js/jquery.json-2.3.js" charset="utf-8"></script>
+     <script type="application/javascript" src="js/jstorage.js" charset="utf-8"></script>
+    <script type="application/javascript" src="js/happy.js" charset="utf-8"></script>
+     <script type="text/javascript" charset="utf-8">
+      $(function(){
+        //var opts = { language: "ja", pathPrefix: "local"};
+        var opts = { pathPrefix: "local"};
+       $("[rel*=localize]").localize("amimenu",opts);
+      // $("[rel*=localize]").localize("amimenu",opts);
+      })
+     </script>
+    <script type="text/javascript" charset="utf-8">
+    
+    
+    //$("[rel*=localize]").localize("amimenu", { language: "en" }):
+    
+    
+$('#inputform').isHappy({
+    fields: {
+      // reference the field you're talking about, probably by `id`
+      // but you could certainly do $('[name=name]') as well.
+      '#city': {
+        required: true,
+        message: 'X '
+      },
+      '#country': {
+        required: true,
+        message: 'X '
+      },
+      '#state': {
+        required: false,
+        message: 'X '
+      },
+      '#phone': {
+        required: true,
+        message: 'Please insert a phone'
+      },
+      '#fileToUpload': {
+        required: false,
+        message: 'Please select a file'
+      },
+      '#intro': {
+        required: true,
+        message: 'Your description'
+      },
+	'#name': {
+        required: true,
+        message: 'Your business name'
+      },
+		'#email': {
+        required: true,
+        message: 'Please insert a valid email'
+       // test: happy.email // this can be *any* function that returns true or false
+      }
+    }
+  });
+
+
+var addToHomeConfig = {
+	message: 'This is a custom message. Your device is an <strong>%device</strong>. The action icon is %icon.'
+};
+
+</script>
+    <script type="text/javascript" charset="utf-8">
+       
+      $(document).ready(function() { 
+      
+      //set badges
+       $("#pusherinfo").html($.jStorage.get("pusherinfonumber"));
+         $("#listpusher").append($.jStorage.get("pusherinfo"));
+      
+      getCountries();
+      if($.jStorage.get("lastcity") && $.jStorage.get("laststate") && $.jStorage.get("lastcountry")){
+      getCities($.jStorage.get("laststate"));
+      getState($.jStorage.get("lastcountry"));
+      $('#namecountry').html($.jStorage.get("lastcountry"));
+      $('#namestate').html($.jStorage.get("laststate"));
+      $('#namecity').html($.jStorage.get("lastcity"));
+      }
+      if($.jStorage.get("lastradius") && $.jStorage.get("lastlat") && $.jStorage.get("lastlng")){
+      $('#radiustosend').html($.jStorage.get("lastradius"));
+      $('#lastSearchModal').modal('show');
+      }
+      //Search handler
+      $("#makesearch").click(function(){
+      $.jStorage.set("lastsearch",$('#searching').val())
+liveSearch('searching',$('#searching').val());
+$('.nav-collapse').collapse('toggle');
+	  });
+      
+    var options = { 
+        beforeSubmit:  showRequest,  // pre-submit callback 
+        success:       showResponse
+    }; 
+    var optionsedit = { 
+        beforeSubmit:  showRequestEdit,  // pre-submit callback 
+        success:       showResponseEdit
+        };
+ 
+    // bind form using 'ajaxForm' 
+    $('#inputform').ajaxForm(options); 
+     $('#inputformedit').ajaxForm(optionsedit); 
+    
+        
+}); 
+
+function login(){
+
+$.post('login?login&oauth_provider=facebook', function(ret){
+    
+    });
+}
+
+// pre-submit callback 
+function showRequest(formData, jqForm, options) { 
+
+                   
+             return true; 
+ }         
+
+// post-submit callback 
+function showResponse(responseText, statusText, xhr, $form)  { 
+    // for normal html responses, the first argument to the success callback 
+    // is the XMLHttpRequest object's responseText property 
+ 
+    // if the ajaxForm method was passed an Options Object with the dataType 
+    // property set to 'xml' then the first argument to the success callback 
+    // is the XMLHttpRequest object's responseXML property 
+ 
+    // if the ajaxForm method was passed an Options Object with the dataType 
+    // property set to 'json' then the first argument to the success callback 
+    // is the json data object returned by the server 
+  cancelRegistration();
+            users.clearLayers();
+            getRestaurants();
+            $('#insertSuccessModal').modal('show');
+        
+} 
+// pre-submit callback 
+function showRequestEdit(formData, jqForm, options) { 
+
+                   
+             return true; 
+ }         
+
+// post-submit callback 
+function showResponseEdit(responseText, statusText, xhr, $form)  { 
+    // for normal html responses, the first argument to the success callback 
+    // is the XMLHttpRequest object's responseText property 
+ 
+    // if the ajaxForm method was passed an Options Object with the dataType 
+    // property set to 'xml' then the first argument to the success callback 
+    // is the XMLHttpRequest object's responseXML property 
+ 
+    // if the ajaxForm method was passed an Options Object with the dataType 
+    // property set to 'json' then the first argument to the success callback 
+    // is the json data object returned by the server 
+  cancelEdit();
+            users.clearLayers();
+            getRestaurants();
+            $('#editSuccessFinalModal').modal('show');
+        
+} 
+
+</script>
+    <script src="lib/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="lib/sharrre/jquery.sharrre-1.3.2.js"></script>
+<script src="js/amimenu.js" charset="utf-8"></script>
+    <div id="listradiusdiv" class="dropdown-menu has-tip has-scroll">
+   <script type="text/javascript" src="lib/bootstrap/js/jquery.dropdown.js"></script>
+<script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+<script src="js/jquery.localize.js"></script>
+ <script type="text/javascript">
+    // Enable pusher logging - don't include this in production
+    
+     Pusher.log = function(message) {
+      if (window.console && window.console.log) window.console.log(message);
+    };
+
+    // Flash fallback logging - don't include this in production
+    WEB_SOCKET_DEBUG = false;
+
+    var pusher = new Pusher('1bd4f5b37007ec3be53a');
+    var channel = pusher.subscribe('test_channel');
+    channel.bind('my_event', function(data) {
+    //get map elements and if the user it´s searching a restaurant, then show the alert or the badge increase +1
+     setPusher(data);
+    });
+      function deletePusher(){
+      $("#pusherinfo").html('');
+      $("#listpusher").html("");
+  $.jStorage.set("pusherinfo","");
+  $.jStorage.set("pusherinfonumber","");
+    
+    }
+
+    
+    function setPusher(data){
+    var total;
+    var numberbadge = $("#pusherinfo").html();
+    if(numberbadge==""){
+    total=1;
+    $.jStorage.set("pusherinfonumber",total);
+    }else{
+    numberbadge =$.jStorage.get("pusherinfonumber");
+    total=parseInt(numberbadge);
+    $.jStorage.set("pusherinfonumber",++total);
+    }
+    
+   
+             var id = data.id;
+          var men = data.mensaje;
+          $("#pusherinfo").html(total);
+         $("#listpusher").append("<li><a href='http://amimenu.mowaps.com/details.php?detailid="+id+"'>"+men+"</a></li>");
+         $.jStorage.set("pusherinfo",$("#listpusher").html());
+         
+       
+    
+    }
+  </script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-29783044-1']);
+_gaq.push(['_trackPageview']);
+(function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+</script>
+  </body>
+</html>

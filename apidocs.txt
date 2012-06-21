@@ -1,0 +1,17 @@
+
+function restaurants()
+
+Parameters
+-city
+-country
+-state
+-searching (free text)
+
+Response:
+[id, nom,ville,tel, glat, glng,intro,img]
+
+Working Examples:
+http://amimenu.mowaps.com/rest/api.php?rquest=restaurants&city=Zaragoza
+http://amimenu.mowaps.com/rest/api.php?rquest=restaurants&country=Spain
+http://amimenu.mowaps.com/rest/api.php?rquest=restaurants&state=Aragon
+http://amimenu.mowaps.com/rest/api.php?rquest=restaurants&searching=olma

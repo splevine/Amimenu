@@ -1,0 +1,44 @@
+#-------------------------------------------------------------------------------
+# Project: Amimenu
+# File: .htaccess
+# Author: Alberto Muñoz (@alberticomf)
+# Date: May 2012
+#  
+# Amimenu is web app for restaurant menus.
+#-------------------------------------------------------------------------------
+
+# Required mime-type for the HTML5 application cache to work.
+AddType text/cache-manifest .manifest
+AddType x-mapp-php5 .php
+AddHandler x-mapp-php5 .php
+Redirect 301 http://www.amimenu.mowaps.com/# http://www.amimenu.mowaps.com/
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www.amimenu.mowaps.com [NC]
+RewriteRule ^(.*)$ http://amimenu.mowaps.com/$1 [L,R=301]
+
+<IfModule mod_deflate.c>
+        # Insert filter
+        SetOutputFilter DEFLATE
+
+        # Netscape 4.x has some problems...
+        BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+        # Netscape 4.06-4.08 have some more problems
+        BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+        # MSIE masquerades as Netscape, but it is fine
+        # BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+        # NOTE: Due to a bug in mod_setenvif up to Apache 2.0.48
+        # the above regex won't work. You can use the following
+        # workaround to get the desired effect:
+        BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+
+        # Don't compress images
+        SetEnvIfNoCase Request_URI \
+        \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+        # Make sure proxies don't deliver the wrong content
+        Header append Vary User-Agent env=!dont-vary
+</IfModule>
