@@ -48,6 +48,10 @@ http://pusher.com/
 Clickatell
 http://clickatell.com/
 
+Help
+=======
+It´s hard to work alone, if you like it and you could help me, you are welcome to the team ;)
+
 Author
 =======
 * Alberto Muñoz Fuertes
