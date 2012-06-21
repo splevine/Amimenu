@@ -1,10 +1,22 @@
 Amimenu
 =======
+http://amimenu.mowaps.com
 
-Mobile Open Restaurant Search Data Base. Made and update by users.
+Live Beta (Mobile and Desktop)
+=======
+http://amimenu.mowaps.com/amimenu
 
-Amimenu it's based on the following techs:
+OverView
+=======
+Mobile Open Restaurant Search Data Base. Made and update by users. Based on Bootstrap and working with localstorage, Amimenu it´s a web app that users could install in iPhone and it´s design for mobile devices.
+Amimenu it´s a mobile web app that help user to upload restaurant everywhere, updating daily menus and description.
+If you are owner of one of the restaurant, you could easy send us a email asking about your restaurant and you will manage it.
+Amimenu bring you the oportunity of send "Toques". Let users send you SMS requesting your attention, sending his/her phone and name.
+It´s FREE, I don´t know why but it is.
+Please, don´t hesitate using this code for your own code It´s FREE!
 
+Dependencies
+=======
 Bootstrap Twitter
 http://twitter.github.com/bootstrap/
 
@@ -33,7 +45,15 @@ http://sharrre.com/
 Pusher
 http://pusher.com/
 
+Clickatell
+http://clickatell.com/
 
+Author
+=======
+* Alberto Muñoz Fuertes
+* http://about.me/alberticomf
+* http://twitter.com/alberticomf
+* slaptot@gmail.com
 
 
 
